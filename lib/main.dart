@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       theme: ApplicationThemeManager.lightThemeData,
       darkTheme: ApplicationThemeManager.darkThemeData,
       themeMode: vm.currentTheme,
-      locale: Locale("en"),
+      locale: const Locale("en"),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: SplashView.routeName,

@@ -92,7 +92,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 DateFormat.yMMMMd().format(extractDateTime(vm.selectedDate)),
                 textAlign: TextAlign.center,
                 style: Constants.theme.textTheme.bodyMedium?.copyWith(
-                    color: vm.isDark() ? Colors.white : Colors.grey.shade600,
+                    color: vm.isDark() ? Colors.black : Colors.grey.shade600,
                     fontWeight: FontWeight.w500),
               ),
             ),

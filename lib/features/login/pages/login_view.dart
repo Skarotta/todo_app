@@ -50,133 +50,137 @@ class _LoginViewState extends State<LoginView> {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Form(
             key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: mediaQuery.height * 0.15),
-                Text(
-                  "Welcome back!",
-                  textAlign: TextAlign.start,
-                  style:
-                      theme.textTheme.titleLarge?.copyWith(color: Colors.black),
-                ),
-                const SizedBox(height: 30),
-                Text(
-                  "E-mail",
-                  textAlign: TextAlign.start,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: mediaQuery.height * 0.15),
+                  Text(
+                    "Welcome back!",
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.titleLarge
+                        ?.copyWith(color: Colors.black),
                   ),
-                ),
-                CustomTextField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  hint: "Enter your e-mail address",
-                  hintColor: Colors.black87,
-                  suffixWidget: Icon(Icons.email_rounded),
-                  onValidate: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "you must enter your e-mail address";
-                    }
+                  const SizedBox(height: 30),
+                  Text(
+                    "E-mail",
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  CustomTextField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    hint: "Enter your e-mail address",
+                    hintColor: Colors.black87,
+                    suffixWidget: Icon(Icons.email_rounded),
+                    onValidate: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "you must enter your e-mail address";
+                      }
 
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  "Password",
-                  textAlign: TextAlign.start,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
+                      return null;
+                    },
                   ),
-                ),
-                CustomTextField(
-                  controller: passwordController,
-                  keyboardType: TextInputType.emailAddress,
-                  hint: "Enter your password",
-                  hintColor: Colors.black87,
-                  isPassword: true,
-                  maxLines: 1,
-                  onValidate: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "you must enter your password";
-                    }
+                  const SizedBox(height: 20),
+                  Text(
+                    "Password",
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  CustomTextField(
+                    controller: passwordController,
+                    keyboardType: TextInputType.emailAddress,
+                    hint: "Enter your password",
+                    hintColor: Colors.black87,
+                    isPassword: true,
+                    maxLines: 1,
+                    onValidate: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "you must enter your password";
+                      }
 
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 80),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: theme.primaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                      return null;
+                    },
                   ),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      FirebaseUtils()
-                          .signIN(emailController.text, passwordController.text)
-                          .then((value) {
-                        if (value) {
-                          SnackBarService.showSuccessMessage(
-                              "Your logged in successfully");
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            LayoutView.routeName,
-                            (route) => false,
-                          );
-                        }
-                      });
-                    }
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  const SizedBox(height: 80),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: theme.primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                    ),
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        FirebaseUtils()
+                            .signIN(
+                                emailController.text, passwordController.text)
+                            .then((value) {
+                          if (value) {
+                            SnackBarService.showSuccessMessage(
+                                "Your logged in successfully");
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              LayoutView.routeName,
+                              (route) => false,
+                            );
+                          }
+                        });
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Login",
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 34,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Login",
-                        style: theme.textTheme.bodyMedium,
+                        "OR",
+                        style: theme.textTheme.bodyLarge
+                            ?.copyWith(fontSize: 20, color: Colors.black),
                       ),
-                      Icon(
-                        Icons.arrow_forward,
-                        size: 34,
-                        color: Colors.white,
-                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            RegisterView.routeName,
+                          );
+                        },
+                        child: Text(
+                          "Create new account!",
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                              fontSize: 20,
+                              color: Colors.black,
+                              decoration: TextDecoration.underline),
+                        ),
+                      )
                     ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "OR",
-                      style: theme.textTheme.bodyLarge
-                          ?.copyWith(fontSize: 20, color: Colors.black),
-                    ),
-                    const SizedBox(width: 8),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          RegisterView.routeName,
-                        );
-                      },
-                      child: Text(
-                        "Create new account!",
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                            fontSize: 20,
-                            color: Colors.black,
-                            decoration: TextDecoration.underline),
-                      ),
-                    )
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

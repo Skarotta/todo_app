@@ -106,7 +106,7 @@ class ApplicationThemeManager {
             ))),
     bottomAppBarTheme: const BottomAppBarTheme(
       padding: EdgeInsets.zero,
-      color: Colors.white,
+      color: Colors.black,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
